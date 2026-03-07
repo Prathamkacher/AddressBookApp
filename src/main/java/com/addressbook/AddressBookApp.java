@@ -13,5 +13,4 @@ public class AddressBookApp {
         AddressBookMain addressBookMain = new AddressBookMain();
         addressBookMain.start();
     }
-
 }

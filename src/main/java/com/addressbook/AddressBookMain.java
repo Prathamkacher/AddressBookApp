@@ -1,38 +1,59 @@
 package com.addressbook;
 
 import com.addressbook.model.Contact;
-import java.util.ArrayList;
-import java.util.List;
+import com.addressbook.service.AddressBook;
+
+import java.util.Scanner;
 
 public class AddressBookMain {
 
-    private List<Contact> contacts = new ArrayList<>();
+    private AddressBook addressBook = new AddressBook();
 
     public void start() {
 
         System.out.println("\nWELCOME TO ADDRESS BOOK APP\n");
 
-        Contact person = new Contact(
-                "Pratham",
-                "Kacher",
-                "MP Nagar",
-                "Bhopal",
-                "Madhya Pradesh",
-                "462023",
-                "9876543210",
-                "pratham@gmail.com"
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter First Name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter Last Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Enter Address: ");
+        String address = scanner.nextLine();
+
+        System.out.print("Enter City: ");
+        String city = scanner.nextLine();
+
+        System.out.print("Enter State: ");
+        String state = scanner.nextLine();
+
+        System.out.print("Enter Zip: ");
+        String zip = scanner.nextLine();
+
+        System.out.print("Enter Phone Number: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Enter Email: ");
+        String email = scanner.nextLine();
+
+        Contact contact = new Contact(
+                firstName,
+                lastName,
+                address,
+                city,
+                state,
+                zip,
+                phone,
+                email
         );
 
-        contacts.add(person);
+        addressBook.addContact(contact);
 
-        displayContacts();
-    }
+        System.out.println("\nContact Added Successfully!\n");
 
-    private void displayContacts() {
-
-        for (Contact contact : contacts) {
-            System.out.println(contact);
-            System.out.println("-------------------------");
-        }
+        addressBook.displayContacts();
     }
 }
