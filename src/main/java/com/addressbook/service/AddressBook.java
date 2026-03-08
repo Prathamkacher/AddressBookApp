@@ -52,6 +52,32 @@ public class AddressBook {
                 contact.setEmail(scanner.nextLine());
 
                 System.out.println("\nContact Updated Successfully!\n");
+
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Contact not found!");
+        }
+    }
+
+    // UC4 - Delete Contact
+    public void deleteContact(String name) {
+
+        boolean found = false;
+
+        for (int i = 0; i < contacts.size(); i++) {
+
+            Contact contact = contacts.get(i);
+
+            if (contact.getFirstName().equalsIgnoreCase(name)) {
+
+                contacts.remove(i);
+
+                System.out.println("\nContact Deleted Successfully!\n");
+
                 found = true;
                 break;
             }

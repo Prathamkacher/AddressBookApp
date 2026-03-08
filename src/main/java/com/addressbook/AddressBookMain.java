@@ -64,5 +64,14 @@ public class AddressBookMain {
 
         System.out.println("\nUpdated Contact List:\n");
         addressBook.displayContacts();
+        
+     // UC4 - Delete Contact
+        System.out.print("\nEnter First Name of Contact to Delete: ");
+        String deleteName = scanner.nextLine();
+
+        addressBook.deleteContact(deleteName);
+
+        System.out.println("\nContacts After Deletion:\n");
+        addressBook.displayContacts();
     }
 }
