@@ -3,9 +3,8 @@ package com.addressbook;
 import com.addressbook.model.Contact;
 import com.addressbook.service.AddressBook;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
 
@@ -24,7 +23,9 @@ public class AddressBookMain {
             System.out.println("2. Select Address Book");
             System.out.println("3. Search Person by City");
             System.out.println("4. Search Person by State");
-            System.out.println("5. Exit");
+            System.out.println("5. View Persons by City");
+            System.out.println("6. View Persons by State");
+            System.out.println("7. Exit");
 
             System.out.print("Choose option: ");
 
@@ -94,6 +95,18 @@ public class AddressBookMain {
 
                 case 5:
 
+                    viewPersonsByCity();
+
+                    break;
+
+                case 6:
+
+                    viewPersonsByState();
+
+                    break;
+
+                case 7:
+
                     System.out.println("Exiting...");
 
                     return;
@@ -116,6 +129,8 @@ public class AddressBookMain {
             System.out.println("3. Edit Contact");
             System.out.println("4. Delete Contact");
             System.out.println("5. Back");
+
+            System.out.print("Choose option: ");
 
             int choice = Integer.parseInt(scanner.nextLine());
 
@@ -148,7 +163,14 @@ public class AddressBookMain {
                     String email = scanner.nextLine();
 
                     Contact contact = new Contact(
-                            firstName, lastName, address, city, state, zip, phone, email
+                            firstName,
+                            lastName,
+                            address,
+                            city,
+                            state,
+                            zip,
+                            phone,
+                            email
                     );
 
                     addressBook.addContact(contact);
@@ -180,11 +202,15 @@ public class AddressBookMain {
                 case 5:
 
                     return;
+
+                default:
+
+                    System.out.println("Invalid choice.");
             }
         }
     }
 
-    // UC8 Search by City using Streams
+    // UC8 - Search by City
     private void searchByCity(String city) {
 
         addressBooks.values().stream()
@@ -197,11 +223,11 @@ public class AddressBookMain {
 
                     System.out.println(contact);
 
-                    System.out.println("-------------------");
+                    System.out.println("----------------------");
                 });
     }
 
-    // UC8 Search by State using Streams
+    // UC8 - Search by State
     private void searchByState(String state) {
 
         addressBooks.values().stream()
@@ -214,7 +240,53 @@ public class AddressBookMain {
 
                     System.out.println(contact);
 
-                    System.out.println("-------------------");
+                    System.out.println("----------------------");
                 });
+    }
+
+    // UC9 - View persons grouped by city
+    private void viewPersonsByCity() {
+
+        Map<String, List<Contact>> cityDictionary =
+                addressBooks.values().stream()
+
+                        .flatMap(book -> book.getContacts().stream())
+
+                        .collect(Collectors.groupingBy(Contact::getCity));
+
+        cityDictionary.forEach((city, persons) -> {
+
+            System.out.println("\nCity: " + city);
+
+            persons.forEach(person -> {
+
+                System.out.println(person);
+
+                System.out.println("----------------------");
+            });
+        });
+    }
+
+    // UC9 - View persons grouped by state
+    private void viewPersonsByState() {
+
+        Map<String, List<Contact>> stateDictionary =
+                addressBooks.values().stream()
+
+                        .flatMap(book -> book.getContacts().stream())
+
+                        .collect(Collectors.groupingBy(Contact::getState));
+
+        stateDictionary.forEach((state, persons) -> {
+
+            System.out.println("\nState: " + state);
+
+            persons.forEach(person -> {
+
+                System.out.println(person);
+
+                System.out.println("----------------------");
+            });
+        });
     }
 }
