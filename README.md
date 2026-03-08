@@ -36,10 +36,6 @@ To create a `Contact` object containing:
 
 ---
 
-# Address Book Application
----
----
-
 ## 📇 UC2 – Add Contact Using Console Input
 
 ## Description  
