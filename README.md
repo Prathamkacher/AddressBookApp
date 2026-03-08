@@ -287,3 +287,30 @@ To determine and display the number of contacts available in a specific city or 
 👉 [UC10 – Count Contacts by City or State](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC10-count-contacts-by-city-or-state)
 
 ---
+
+## 📇 UC11 – Sort Contacts Alphabetically by Name
+
+## Description  
+This use case implements the ability to sort contact entries in the Address Book alphabetically based on the person's name. The sorting is performed using the Java Collection Library and Java Streams.
+
+## Objective  
+To display contact details sorted alphabetically by the person's name using console output.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. Contacts are retrieved from the Address Book collection  
+4. Java Streams are used to sort contacts alphabetically by name  
+5. The sorted contact list is displayed in the console using the overridden `toString()` method  
+
+## Key Concepts  
+- Java Streams API  
+- Sorting collections using `sorted()`  
+- Comparator for alphabetical sorting  
+- Overriding `toString()` for formatted output  
+- Console output for displaying sorted results  
+
+🔗 _Code Link:_  
+👉 [UC11 – Sort Contacts by Name](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC11-sort-contacts-by-name)
+
+---
