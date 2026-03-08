@@ -369,3 +369,31 @@ To persist Address Book contacts by writing them to a file and reading them back
 👉 [UC13 – Address Book File IO](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC13-read-write-addressbook-file-io)
 
 ---
+
+## 📇 UC14 – Read and Write Address Book as CSV File
+
+## Description  
+This use case enables the Address Book application to store and retrieve contact details in CSV format. The system uses the OpenCSV library to write contact information to a CSV file and read it back when required.
+
+## Objective  
+To persist Address Book contacts in a CSV file format using the OpenCSV library.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. Contacts are retrieved from the Address Book collection  
+4. Contact details are written to a CSV file using the OpenCSV library  
+5. The CSV file can be read to retrieve stored contact information  
+6. The retrieved contacts are displayed in the console  
+
+## Key Concepts  
+- CSV file handling in Java  
+- Using the OpenCSV library  
+- Writing data using `CSVWriter`  
+- Reading data using `CSVReader`  
+- Managing structured data in CSV format  
+
+🔗 _Code Link:_  
+👉 [UC14 – Address Book CSV IO](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC14-read-write-addressbook-csv/src)
+
+---
