@@ -147,3 +147,30 @@ To allow the user to repeatedly enter contact details and store multiple contact
 👉 [UC5 – Add Multiple Contacts](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC5-add-multiple-contacts)
 
 ---
+## 📇 UC6 – Add Multiple Address Books
+
+## Description  
+This use case refactors the system to support multiple Address Books. Each Address Book is identified by a unique name and managed within the system using a dictionary structure.
+
+## Objective  
+To allow the user to create multiple Address Books and store them in a dictionary where the Address Book name acts as the key.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. User enters a name for a new Address Book through the console  
+4. A new Address Book is created  
+5. The Address Book is stored in a dictionary using its name as the key  
+6. Multiple Address Books can be added and managed in the system
+
+## Key Concepts  
+- Object-Oriented Programming (OOP)  
+- Managing multiple Address Books  
+- Dictionary data structure using `HashMap`  
+- Key-value mapping (`AddressBookName → AddressBook`)  
+- Console input using `Scanner`
+
+🔗 _Code Link:_  
+👉 [UC6 – Multiple Address Books](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC6-multiple-adressbooks)
+
+---
