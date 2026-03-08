@@ -25,7 +25,9 @@ public class AddressBookMain {
             System.out.println("4. Search Person by State");
             System.out.println("5. View Persons by City");
             System.out.println("6. View Persons by State");
-            System.out.println("7. Exit");
+            System.out.println("7. Count Persons by City");
+            System.out.println("8. Count Persons by State");
+            System.out.println("9. Exit");
 
             System.out.print("Choose option: ");
 
@@ -36,7 +38,6 @@ public class AddressBookMain {
                 case 1:
 
                     System.out.print("Enter Address Book Name: ");
-
                     String bookName = scanner.nextLine();
 
                     if (addressBooks.containsKey(bookName)) {
@@ -56,7 +57,6 @@ public class AddressBookMain {
                 case 2:
 
                     System.out.print("Enter Address Book Name: ");
-
                     String name = scanner.nextLine();
 
                     AddressBook book = addressBooks.get(name);
@@ -76,39 +76,38 @@ public class AddressBookMain {
                 case 3:
 
                     System.out.print("Enter City: ");
-
-                    String city = scanner.nextLine();
-
-                    searchByCity(city);
-
+                    searchByCity(scanner.nextLine());
                     break;
 
                 case 4:
 
                     System.out.print("Enter State: ");
-
-                    String state = scanner.nextLine();
-
-                    searchByState(state);
-
+                    searchByState(scanner.nextLine());
                     break;
 
                 case 5:
 
                     viewPersonsByCity();
-
                     break;
 
                 case 6:
 
                     viewPersonsByState();
-
                     break;
 
                 case 7:
 
-                    System.out.println("Exiting...");
+                    countPersonsByCity();
+                    break;
 
+                case 8:
+
+                    countPersonsByState();
+                    break;
+
+                case 9:
+
+                    System.out.println("Exiting...");
                     return;
 
                 default:
@@ -180,23 +179,18 @@ public class AddressBookMain {
                 case 2:
 
                     addressBook.displayContacts();
-
                     break;
 
                 case 3:
 
                     System.out.print("Enter First Name to Edit: ");
-
                     addressBook.editContact(scanner.nextLine());
-
                     break;
 
                 case 4:
 
                     System.out.print("Enter First Name to Delete: ");
-
                     addressBook.deleteContact(scanner.nextLine());
-
                     break;
 
                 case 5:
@@ -210,48 +204,36 @@ public class AddressBookMain {
         }
     }
 
-    // UC8 - Search by City
+    // UC8
     private void searchByCity(String city) {
 
         addressBooks.values().stream()
-
                 .flatMap(book -> book.getContacts().stream())
-
                 .filter(contact -> contact.getCity().equalsIgnoreCase(city))
-
                 .forEach(contact -> {
-
                     System.out.println(contact);
-
                     System.out.println("----------------------");
                 });
     }
 
-    // UC8 - Search by State
+    // UC8
     private void searchByState(String state) {
 
         addressBooks.values().stream()
-
                 .flatMap(book -> book.getContacts().stream())
-
                 .filter(contact -> contact.getState().equalsIgnoreCase(state))
-
                 .forEach(contact -> {
-
                     System.out.println(contact);
-
                     System.out.println("----------------------");
                 });
     }
 
-    // UC9 - View persons grouped by city
+    // UC9
     private void viewPersonsByCity() {
 
         Map<String, List<Contact>> cityDictionary =
                 addressBooks.values().stream()
-
                         .flatMap(book -> book.getContacts().stream())
-
                         .collect(Collectors.groupingBy(Contact::getCity));
 
         cityDictionary.forEach((city, persons) -> {
@@ -261,20 +243,17 @@ public class AddressBookMain {
             persons.forEach(person -> {
 
                 System.out.println(person);
-
                 System.out.println("----------------------");
             });
         });
     }
 
-    // UC9 - View persons grouped by state
+    // UC9
     private void viewPersonsByState() {
 
         Map<String, List<Contact>> stateDictionary =
                 addressBooks.values().stream()
-
                         .flatMap(book -> book.getContacts().stream())
-
                         .collect(Collectors.groupingBy(Contact::getState));
 
         stateDictionary.forEach((state, persons) -> {
@@ -284,9 +263,34 @@ public class AddressBookMain {
             persons.forEach(person -> {
 
                 System.out.println(person);
-
                 System.out.println("----------------------");
             });
         });
+    }
+
+    // UC10
+    private void countPersonsByCity() {
+
+        Map<String, Long> cityCount =
+                addressBooks.values().stream()
+                        .flatMap(book -> book.getContacts().stream())
+                        .collect(Collectors.groupingBy(Contact::getCity, Collectors.counting()));
+
+        cityCount.forEach((city, count) ->
+
+                System.out.println(city + " : " + count + " persons"));
+    }
+
+    // UC10
+    private void countPersonsByState() {
+
+        Map<String, Long> stateCount =
+                addressBooks.values().stream()
+                        .flatMap(book -> book.getContacts().stream())
+                        .collect(Collectors.groupingBy(Contact::getState, Collectors.counting()));
+
+        stateCount.forEach((state, count) ->
+
+                System.out.println(state + " : " + count + " persons"));
     }
 }
