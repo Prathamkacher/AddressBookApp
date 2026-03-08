@@ -89,3 +89,33 @@ To allow the user to search for an existing contact by name and update their det
 
 🔗 _Code Link:_  
 👉 [UC3 – Edit Contact](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC3-edit-contact)
+
+---
+
+## 📇 UC4 – Delete Contact Using Name
+
+## Description  
+This use case implements the ability to delete an existing contact from the Address Book using the contact's name.
+
+## Objective  
+To allow the user to search for a contact by name and remove that contact from the Address Book through console input.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. User enters the name of the contact to delete  
+4. The Address Book searches for the contact in the contact list  
+5. If the contact is found, it is removed from the Address Book  
+6. The updated contact list is displayed  
+
+## Key Concepts  
+- Object-Oriented Programming (OOP)  
+- Searching objects in a collection  
+- Removing objects from a list  
+- Console input using `Scanner`  
+- Separation of layers (Model, Service, Main)
+
+🔗 _Code Link:_  
+👉 [UC4 – Delete Contact](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC4-delete-contact)
+
+---
