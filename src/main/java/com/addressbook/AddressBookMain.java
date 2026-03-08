@@ -27,7 +27,8 @@ public class AddressBookMain {
             System.out.println("6. View Persons by State");
             System.out.println("7. Count Persons by City");
             System.out.println("8. Count Persons by State");
-            System.out.println("9. Exit");
+            System.out.println("9. Sort Contacts by Name");
+            System.out.println("10. Exit");
 
             System.out.print("Choose option: ");
 
@@ -106,6 +107,11 @@ public class AddressBookMain {
                     break;
 
                 case 9:
+
+                    sortContactsByName();
+                    break;
+
+                case 10:
 
                     System.out.println("Exiting...");
                     return;
@@ -277,7 +283,6 @@ public class AddressBookMain {
                         .collect(Collectors.groupingBy(Contact::getCity, Collectors.counting()));
 
         cityCount.forEach((city, count) ->
-
                 System.out.println(city + " : " + count + " persons"));
     }
 
@@ -290,7 +295,20 @@ public class AddressBookMain {
                         .collect(Collectors.groupingBy(Contact::getState, Collectors.counting()));
 
         stateCount.forEach((state, count) ->
-
                 System.out.println(state + " : " + count + " persons"));
+    }
+
+    // UC11
+    private void sortContactsByName() {
+
+        addressBooks.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getFirstName))
+                .forEach(contact -> {
+
+                    System.out.println(contact);
+
+                    System.out.println("----------------------");
+                });
     }
 }
