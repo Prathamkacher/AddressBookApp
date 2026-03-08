@@ -1,6 +1,7 @@
 package com.addressbook.service;
 
 import com.addressbook.model.Contact;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,23 +10,40 @@ public class AddressBook {
 
     private List<Contact> contacts = new ArrayList<>();
 
+    // UC7 - Add contact with duplicate check
     public void addContact(Contact contact) {
+
+        boolean duplicate = contacts.stream()
+                .anyMatch(existing -> existing.equals(contact));
+
+        if (duplicate) {
+
+            System.out.println("Duplicate contact! Person already exists.");
+            return;
+        }
+
         contacts.add(contact);
+        System.out.println("Contact Added Successfully!");
     }
 
     public void displayContacts() {
 
+        if (contacts.isEmpty()) {
+            System.out.println("No contacts found.");
+            return;
+        }
+
         for (Contact contact : contacts) {
+
             System.out.println(contact);
             System.out.println("----------------------");
         }
     }
 
-    // UC3 - Edit Contact
+    // Edit Contact
     public void editContact(String name) {
 
         Scanner scanner = new Scanner(System.in);
-        boolean found = false;
 
         for (Contact contact : contacts) {
 
@@ -45,45 +63,30 @@ public class AddressBook {
                 System.out.print("Enter New Zip: ");
                 contact.setZip(scanner.nextLine());
 
-                System.out.print("Enter New Phone Number: ");
+                System.out.print("Enter New Phone: ");
                 contact.setPhoneNumber(scanner.nextLine());
 
                 System.out.print("Enter New Email: ");
                 contact.setEmail(scanner.nextLine());
 
-                System.out.println("\nContact Updated Successfully!\n");
-
-                found = true;
-                break;
+                System.out.println("Contact Updated Successfully!");
+                return;
             }
         }
 
-        if (!found) {
-            System.out.println("Contact not found!");
-        }
+        System.out.println("Contact not found!");
     }
 
-    // UC4 - Delete Contact
+    // Delete Contact
     public void deleteContact(String name) {
 
-        boolean found = false;
+        boolean removed = contacts.removeIf(
+                contact -> contact.getFirstName().equalsIgnoreCase(name)
+        );
 
-        for (int i = 0; i < contacts.size(); i++) {
-
-            Contact contact = contacts.get(i);
-
-            if (contact.getFirstName().equalsIgnoreCase(name)) {
-
-                contacts.remove(i);
-
-                System.out.println("\nContact Deleted Successfully!\n");
-
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
+        if (removed) {
+            System.out.println("Contact Deleted Successfully!");
+        } else {
             System.out.println("Contact not found!");
         }
     }

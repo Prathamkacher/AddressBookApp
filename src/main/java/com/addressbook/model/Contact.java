@@ -1,5 +1,7 @@
 package com.addressbook.model;
 
+import java.util.Objects;
+
 public class Contact {
 
     private String firstName;
@@ -25,42 +27,47 @@ public class Contact {
         this.email = email;
     }
 
-    // GETTERS
     public String getFirstName() {
         return firstName;
     }
 
-    // SETTERS
-    public void setAddress(String address) {
-        this.address = address;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setAddress(String address) { this.address = address; }
+    public void setCity(String city) { this.city = city; }
+    public void setState(String state) { this.state = state; }
+    public void setZip(String zip) { this.zip = zip; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setEmail(String email) { this.email = email; }
+
+    // equals() for duplicate checking
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) return true;
+
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Contact contact = (Contact) obj;
+
+        return firstName.equalsIgnoreCase(contact.firstName) &&
+               lastName.equalsIgnoreCase(contact.lastName);
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    // hashCode (required when equals is overridden)
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName.toLowerCase(), lastName.toLowerCase());
     }
 
     @Override
     public String toString() {
         return firstName + " " + lastName + "\n" +
-                address + ", " + city + ", " + state + "\n" +
-                "Zip: " + zip + "\n" +
-                "Phone: " + phoneNumber + "\n" +
-                "Email: " + email;
+               address + ", " + city + ", " + state + "\n" +
+               "Zip: " + zip + "\n" +
+               "Phone: " + phoneNumber + "\n" +
+               "Email: " + email;
     }
 }
