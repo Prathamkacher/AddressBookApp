@@ -61,3 +61,31 @@ To allow the user to enter contact details through the console and create a `Con
 
 🔗 _Code Link:_  
 👉 [UC2 – Add Contact](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC2-add-contact)
+
+---
+
+## 📇 UC3 – Edit Existing Contact Using Name
+
+## Description  
+This use case implements the ability to edit the details of an existing contact in the Address Book using the contact's name.
+
+## Objective  
+To allow the user to search for an existing contact by name and update their details through console input.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. User enters the name of the contact to edit  
+4. The Address Book searches for the matching contact  
+5. If the contact is found, the user updates the required details through the console  
+6. The updated contact information is saved and displayed  
+
+## Key Concepts  
+- Object-Oriented Programming (OOP)  
+- Searching contacts using name  
+- Updating object data  
+- Console input using `Scanner`  
+- Separation of layers (Model, Service, Main)
+
+🔗 _Code Link:_  
+👉 [UC3 – Edit Contact](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC3-edit-contact)
