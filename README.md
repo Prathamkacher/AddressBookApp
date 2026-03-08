@@ -259,3 +259,31 @@ To organize contacts based on city and state and allow users to view all persons
 👉 [UC9 – View Persons by City or State](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC9-view-persons-by-city-or-state)
 
 ---
+
+## 📇 UC10 – Count Contacts by City or State
+
+## Description  
+This use case allows counting the number of contact persons belonging to a particular city or state across Address Books. The counting operation is performed using Java Streams.
+
+## Objective  
+To determine and display the number of contacts available in a specific city or state.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. User enters the city or state to search  
+4. The system retrieves contacts from the Address Books  
+5. Java Streams are used to filter contacts based on city or state  
+6. The total number of matching contacts is counted and displayed  
+
+## Key Concepts  
+- Java Streams API  
+- Counting elements using `stream().count()`  
+- Filtering collections using `filter()`  
+- Managing contacts using collections  
+- Efficient data processing using streams  
+
+🔗 _Code Link:_  
+👉 [UC10 – Count Contacts by City or State](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC10-count-contacts-by-city-or-state)
+
+---
