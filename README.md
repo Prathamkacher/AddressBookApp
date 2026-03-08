@@ -174,3 +174,31 @@ To allow the user to create multiple Address Books and store them in a dictionar
 👉 [UC6 – Multiple Address Books](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC6-multiple-adressbooks)
 
 ---
+
+## 📇 UC7 – Prevent Duplicate Contact Entries
+
+## Description  
+This use case ensures that duplicate entries of the same person are not allowed within a particular Address Book. Before adding a new contact, the system checks whether a contact with the same name already exists.
+
+## Objective  
+To validate new contact entries and prevent duplicate contacts from being added to the Address Book.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. User enters contact details through the console  
+4. The Address Book checks if a contact with the same name already exists  
+5. If the contact exists, the system displays a duplicate entry message  
+6. If the contact does not exist, the new contact is added to the Address Book  
+
+## Key Concepts  
+- Object-Oriented Programming (OOP)  
+- Data validation before insertion  
+- Searching objects within a collection  
+- Preventing duplicate entries  
+- Console input using `Scanner`
+
+🔗 _Code Link:_  
+👉 [UC7 – Prevent Duplicate Contact](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC7-prevent-duplicate-contact)
+
+---
