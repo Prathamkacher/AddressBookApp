@@ -2,6 +2,7 @@ package com.addressbook;
 
 import com.addressbook.model.Contact;
 import com.addressbook.service.AddressBook;
+import com.addressbook.service.FileService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 public class AddressBookMain {
 
     private Map<String, AddressBook> addressBooks = new HashMap<>();
+    private FileService fileService = new FileService();
 
     public void start() {
 
@@ -31,7 +33,9 @@ public class AddressBookMain {
             System.out.println("10. Sort Contacts by City");
             System.out.println("11. Sort Contacts by State");
             System.out.println("12. Sort Contacts by Zip");
-            System.out.println("13. Exit");
+            System.out.println("13. Write Contacts to File");
+            System.out.println("14. Read Contacts from File");
+            System.out.println("15. Exit");
 
             System.out.print("Choose option: ");
 
@@ -40,77 +44,124 @@ public class AddressBookMain {
             switch (choice) {
 
                 case 1:
+
                     System.out.print("Enter Address Book Name: ");
                     String bookName = scanner.nextLine();
 
                     if (addressBooks.containsKey(bookName)) {
+
                         System.out.println("Address Book already exists!");
-                    } else {
+                    }
+
+                    else {
+
                         addressBooks.put(bookName, new AddressBook());
+
                         System.out.println("Address Book Created!");
                     }
+
                     break;
 
                 case 2:
+
                     System.out.print("Enter Address Book Name: ");
                     String name = scanner.nextLine();
 
                     AddressBook book = addressBooks.get(name);
 
                     if (book == null) {
+
                         System.out.println("Address Book not found!");
-                    } else {
+                    }
+
+                    else {
+
                         addressBookMenu(book, scanner);
                     }
+
                     break;
 
                 case 3:
+
                     System.out.print("Enter City: ");
                     searchByCity(scanner.nextLine());
+
                     break;
 
                 case 4:
+
                     System.out.print("Enter State: ");
                     searchByState(scanner.nextLine());
+
                     break;
 
                 case 5:
+
                     viewPersonsByCity();
+
                     break;
 
                 case 6:
+
                     viewPersonsByState();
+
                     break;
 
                 case 7:
+
                     countPersonsByCity();
+
                     break;
 
                 case 8:
+
                     countPersonsByState();
+
                     break;
 
                 case 9:
+
                     sortContactsByName();
+
                     break;
 
                 case 10:
+
                     sortContactsByCity();
+
                     break;
 
                 case 11:
+
                     sortContactsByState();
+
                     break;
 
                 case 12:
+
                     sortContactsByZip();
+
                     break;
 
                 case 13:
+
+                    fileService.writeContactsToFile(getAllContacts());
+
+                    break;
+
+                case 14:
+
+                    fileService.readContactsFromFile();
+
+                    break;
+
+                case 15:
+
                     System.out.println("Exiting...");
                     return;
 
                 default:
+
                     System.out.println("Invalid choice.");
             }
         }
@@ -166,156 +217,118 @@ public class AddressBookMain {
                     break;
 
                 case 2:
+
                     addressBook.displayContacts();
+
                     break;
 
                 case 3:
+
                     System.out.print("Enter First Name to Edit: ");
                     addressBook.editContact(scanner.nextLine());
+
                     break;
 
                 case 4:
+
                     System.out.print("Enter First Name to Delete: ");
                     addressBook.deleteContact(scanner.nextLine());
+
                     break;
 
                 case 5:
+
                     return;
             }
         }
     }
 
-    // Search by City
+    private List<Contact> getAllContacts() {
+
+        return addressBooks.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .collect(Collectors.toList());
+    }
+
     private void searchByCity(String city) {
 
-        addressBooks.values().stream()
-                .flatMap(book -> book.getContacts().stream())
-                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
-                .forEach(contact -> {
-                    System.out.println(contact);
-                    System.out.println("----------------------");
-                });
+        getAllContacts().stream()
+                .filter(c -> c.getCity().equalsIgnoreCase(city))
+                .forEach(System.out::println);
     }
 
-    // Search by State
     private void searchByState(String state) {
 
-        addressBooks.values().stream()
-                .flatMap(book -> book.getContacts().stream())
-                .filter(contact -> contact.getState().equalsIgnoreCase(state))
-                .forEach(contact -> {
-                    System.out.println(contact);
-                    System.out.println("----------------------");
-                });
+        getAllContacts().stream()
+                .filter(c -> c.getState().equalsIgnoreCase(state))
+                .forEach(System.out::println);
     }
 
-    // View persons grouped by city
     private void viewPersonsByCity() {
 
-        Map<String, List<Contact>> cityDictionary =
-                addressBooks.values().stream()
-                        .flatMap(book -> book.getContacts().stream())
-                        .collect(Collectors.groupingBy(Contact::getCity));
+        getAllContacts().stream()
+                .collect(Collectors.groupingBy(Contact::getCity))
+                .forEach((city, persons) -> {
 
-        cityDictionary.forEach((city, persons) -> {
+                    System.out.println("\nCity: " + city);
 
-            System.out.println("\nCity: " + city);
-
-            persons.forEach(person -> {
-                System.out.println(person);
-                System.out.println("----------------------");
-            });
-        });
+                    persons.forEach(System.out::println);
+                });
     }
 
-    // View persons grouped by state
     private void viewPersonsByState() {
 
-        Map<String, List<Contact>> stateDictionary =
-                addressBooks.values().stream()
-                        .flatMap(book -> book.getContacts().stream())
-                        .collect(Collectors.groupingBy(Contact::getState));
+        getAllContacts().stream()
+                .collect(Collectors.groupingBy(Contact::getState))
+                .forEach((state, persons) -> {
 
-        stateDictionary.forEach((state, persons) -> {
+                    System.out.println("\nState: " + state);
 
-            System.out.println("\nState: " + state);
-
-            persons.forEach(person -> {
-                System.out.println(person);
-                System.out.println("----------------------");
-            });
-        });
+                    persons.forEach(System.out::println);
+                });
     }
 
-    // Count persons by city
     private void countPersonsByCity() {
 
-        Map<String, Long> cityCount =
-                addressBooks.values().stream()
-                        .flatMap(book -> book.getContacts().stream())
-                        .collect(Collectors.groupingBy(Contact::getCity, Collectors.counting()));
-
-        cityCount.forEach((city, count) ->
-                System.out.println(city + " : " + count));
+        getAllContacts().stream()
+                .collect(Collectors.groupingBy(Contact::getCity, Collectors.counting()))
+                .forEach((city, count) ->
+                        System.out.println(city + " : " + count));
     }
 
-    // Count persons by state
     private void countPersonsByState() {
 
-        Map<String, Long> stateCount =
-                addressBooks.values().stream()
-                        .flatMap(book -> book.getContacts().stream())
-                        .collect(Collectors.groupingBy(Contact::getState, Collectors.counting()));
-
-        stateCount.forEach((state, count) ->
-                System.out.println(state + " : " + count));
+        getAllContacts().stream()
+                .collect(Collectors.groupingBy(Contact::getState, Collectors.counting()))
+                .forEach((state, count) ->
+                        System.out.println(state + " : " + count));
     }
 
-    // Sort by Name
     private void sortContactsByName() {
 
-        addressBooks.values().stream()
-                .flatMap(book -> book.getContacts().stream())
+        getAllContacts().stream()
                 .sorted(Comparator.comparing(Contact::getFirstName))
-                .forEach(contact -> {
-                    System.out.println(contact);
-                    System.out.println("----------------------");
-                });
+                .forEach(System.out::println);
     }
 
-    // UC12 Sort by City
     private void sortContactsByCity() {
 
-        addressBooks.values().stream()
-                .flatMap(book -> book.getContacts().stream())
+        getAllContacts().stream()
                 .sorted(Comparator.comparing(Contact::getCity))
-                .forEach(contact -> {
-                    System.out.println(contact);
-                    System.out.println("----------------------");
-                });
+                .forEach(System.out::println);
     }
 
-    // UC12 Sort by State
     private void sortContactsByState() {
 
-        addressBooks.values().stream()
-                .flatMap(book -> book.getContacts().stream())
+        getAllContacts().stream()
                 .sorted(Comparator.comparing(Contact::getState))
-                .forEach(contact -> {
-                    System.out.println(contact);
-                    System.out.println("----------------------");
-                });
+                .forEach(System.out::println);
     }
 
-    // UC12 Sort by Zip
     private void sortContactsByZip() {
 
-        addressBooks.values().stream()
-                .flatMap(book -> book.getContacts().stream())
+        getAllContacts().stream()
                 .sorted(Comparator.comparing(Contact::getZip))
-                .forEach(contact -> {
-                    System.out.println(contact);
-                    System.out.println("----------------------");
-                });
+                .forEach(System.out::println);
     }
 }
