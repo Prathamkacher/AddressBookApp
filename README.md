@@ -314,3 +314,30 @@ To display contact details sorted alphabetically by the person's name using cons
 👉 [UC11 – Sort Contacts by Name](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC11-sort-contacts-by-name)
 
 ---
+## 📇 UC12 – Sort Contacts by City, State, or Zip
+
+## Description  
+This use case provides the ability to sort contact entries in the Address Book based on City, State, or Zip. The sorting is implemented using the Java Collection Library and Java Streams.
+
+## Objective  
+To allow users to view contacts sorted by City, State, or Zip using console output.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. Contacts are retrieved from the Address Book collection  
+4. Sorting functions are used to arrange contacts by City, State, or Zip  
+5. Java Streams are used to perform sorting operations  
+6. The sorted contact list is displayed in the console  
+
+## Key Concepts  
+- Java Streams API  
+- Sorting collections using `sorted()`  
+- Comparator for sorting by City, State, and Zip  
+- Use of Collection Library for data management  
+- Console output for displaying sorted results  
+
+🔗 _Code Link:_  
+👉 [UC12 – Sort Contacts by City, State, or Zip](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC12-sort-contacts-by-city-state-zip)
+
+---
