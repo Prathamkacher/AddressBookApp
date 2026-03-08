@@ -341,3 +341,31 @@ To allow users to view contacts sorted by City, State, or Zip using console outp
 👉 [UC12 – Sort Contacts by City, State, or Zip](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC12-sort-contacts-by-city-state-zip)
 
 ---
+
+## 📇 UC13 – Read and Write Address Book to File
+
+## Description  
+This use case enables the Address Book application to store and retrieve contact details using file operations. The system writes contact information to a file and reads the stored data using Java File I/O.
+
+## Objective  
+To persist Address Book contacts by writing them to a file and reading them back when required.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. Contacts are retrieved from the Address Book collection  
+4. Contact details are written to a file using Java File I/O  
+5. The file can be read to retrieve stored contact information  
+6. The retrieved contacts are displayed in the console  
+
+## Key Concepts  
+- Java File I/O  
+- Writing data using `FileWriter` / `BufferedWriter`  
+- Reading data using `FileReader` / `BufferedReader`  
+- Persistent storage of contacts  
+- Handling file operations in Java  
+
+🔗 _Code Link:_  
+👉 [UC13 – Address Book File IO](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC13-read-write-addressbook-file-io)
+
+---
