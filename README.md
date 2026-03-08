@@ -229,3 +229,33 @@ To enable users to search for contacts based on city or state and display all ma
 👉 [UC8 – Search Person by City or State](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC8-search-person-by-city-or-state)
 
 ---
+
+## 📇 UC9 – View Persons by City or State
+
+## Description  
+This use case allows viewing persons grouped by city or state. The system maintains a dictionary mapping city and state to persons and uses Java Streams to retrieve and display contacts.
+
+## Objective  
+To organize contacts based on city and state and allow users to view all persons belonging to a particular city or state.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. Contacts are added to Address Books  
+4. Dictionaries are maintained for:
+   - City → Person
+   - State → Person  
+5. Java Streams are used to filter and retrieve persons belonging to a given city or state  
+6. All matching persons are displayed
+
+## Key Concepts  
+- Java Streams API  
+- Using `HashMap` as a dictionary  
+- Mapping City → List<Person> and State → List<Person>  
+- Filtering and collecting data using streams  
+- Managing collections efficiently
+
+🔗 _Code Link:_  
+👉 [UC9 – View Persons by City or State](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC9-view-persons-by-city-or-state)
+
+---
