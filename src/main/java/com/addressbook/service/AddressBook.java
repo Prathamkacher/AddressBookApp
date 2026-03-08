@@ -90,4 +90,10 @@ public class AddressBook {
             System.out.println("Contact not found!");
         }
     }
+    
+ // Needed for UC8 Stream Search
+    public List<Contact> getContacts() {
+
+        return contacts;
+    }
 }
