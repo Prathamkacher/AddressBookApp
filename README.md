@@ -202,3 +202,30 @@ To validate new contact entries and prevent duplicate contacts from being added 
 👉 [UC7 – Prevent Duplicate Contact](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC7-prevent-duplicate-contact)
 
 ---
+## 📇 UC8 – Search Person by City or State Across Multiple Address Books
+
+## Description  
+This use case allows searching for a person in a specific city or state across multiple Address Books. The search operation utilizes Java Streams to efficiently filter contacts.
+
+## Objective  
+To enable users to search for contacts based on city or state and display all matching persons from multiple Address Books.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. User enters the city or state to search for  
+4. The system retrieves all Address Books stored in the dictionary  
+5. Java Streams are used to filter contacts matching the given city or state  
+6. All matching persons are displayed as search results  
+
+## Key Concepts  
+- Java Streams API  
+- Filtering collections using `stream().filter()`  
+- Managing multiple Address Books using `HashMap`  
+- Searching across nested collections  
+- Console input using `Scanner`
+
+🔗 _Code Link:_  
+👉 [UC8 – Search Person by City or State](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC8-search-person-by-city-or-state)
+
+---
