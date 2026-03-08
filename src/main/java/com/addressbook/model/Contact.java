@@ -25,12 +25,42 @@ public class Contact {
         this.email = email;
     }
 
+    // GETTERS
+    public String getFirstName() {
+        return firstName;
+    }
+
+    // SETTERS
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return firstName + " " + lastName + "\n" +
-               address + ", " + city + ", " + state + "\n" +
-               "Zip: " + zip + "\n" +
-               "Phone: " + phoneNumber + "\n" +
-               "Email: " + email;
+                address + ", " + city + ", " + state + "\n" +
+                "Zip: " + zip + "\n" +
+                "Phone: " + phoneNumber + "\n" +
+                "Email: " + email;
     }
 }

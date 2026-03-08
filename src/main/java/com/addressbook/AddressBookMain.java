@@ -55,5 +55,14 @@ public class AddressBookMain {
         System.out.println("\nContact Added Successfully!\n");
 
         addressBook.displayContacts();
+
+        // UC3
+        System.out.print("\nEnter First Name of Contact to Edit: ");
+        String name = scanner.nextLine();
+
+        addressBook.editContact(name);
+
+        System.out.println("\nUpdated Contact List:\n");
+        addressBook.displayContacts();
     }
 }
