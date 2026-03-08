@@ -119,3 +119,31 @@ To allow the user to search for a contact by name and remove that contact from t
 👉 [UC4 – Delete Contact](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC4-delete-contact)
 
 ---
+## 📇 UC5 – Add Multiple Contacts to Address Book
+
+## Description  
+This use case implements the ability to add multiple contacts to the Address Book using console input. Each contact is added one at a time and stored using a collection.
+
+## Objective  
+To allow the user to repeatedly enter contact details and store multiple contacts in the Address Book using a collection class.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. User enters contact details through the console  
+4. A `Contact` object is created using the provided details  
+5. The contact is added to the Address Book collection  
+6. The process repeats to allow adding multiple contacts  
+7. All stored contacts are displayed
+
+## Key Concepts  
+- Object-Oriented Programming (OOP)  
+- Managing multiple objects using a collection (`ArrayList`)  
+- Looping to accept multiple inputs  
+- Console input using `Scanner`  
+- Separation of layers (Model, Service, Main)
+
+🔗 _Code Link:_  
+👉 [UC5 – Add Multiple Contacts](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC5-add-multiple-contacts)
+
+---
