@@ -3,6 +3,7 @@ package com.addressbook.service;
 import com.addressbook.model.Contact;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,8 @@ public class DatabaseService {
                         rs.getString("state"),
                         rs.getString("zip"),
                         rs.getString("phone"),
-                        rs.getString("email")
+                        rs.getString("email"),
+                        rs.getDate("date_added").toLocalDate()
                 );
 
                 contacts.add(contact);
@@ -94,7 +96,8 @@ public class DatabaseService {
                         rs.getString("state"),
                         rs.getString("zip"),
                         rs.getString("phone"),
-                        rs.getString("email")
+                        rs.getString("email"),
+                        rs.getDate("date_added").toLocalDate()
                 );
             }
 
@@ -104,5 +107,46 @@ public class DatabaseService {
         }
 
         return null;
+    }
+
+    // UC18
+    public List<Contact> getContactsByDateRange(String startDate, String endDate) {
+
+        List<Contact> contacts = new ArrayList<>();
+
+        String query = "SELECT * FROM contacts WHERE date_added BETWEEN ? AND ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setString(1, startDate);
+            ps.setString(2, endDate);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Contact contact = new Contact(
+
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("address"),
+                        rs.getString("city"),
+                        rs.getString("state"),
+                        rs.getString("zip"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getDate("date_added").toLocalDate()
+                );
+
+                contacts.add(contact);
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Date Range Fetch Error: " + e.getMessage());
+        }
+
+        return contacts;
     }
 }

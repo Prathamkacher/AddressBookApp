@@ -1,5 +1,6 @@
 package com.addressbook.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Contact {
@@ -12,10 +13,12 @@ public class Contact {
     private String zip;
     private String phoneNumber;
     private String email;
+    private LocalDate dateAdded;
 
     public Contact(String firstName, String lastName, String address,
                    String city, String state, String zip,
-                   String phoneNumber, String email) {
+                   String phoneNumber, String email,
+                   LocalDate dateAdded) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,6 +28,7 @@ public class Contact {
         this.zip = zip;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.dateAdded = dateAdded;
     }
 
     public String getFirstName() { return firstName; }
@@ -42,6 +46,8 @@ public class Contact {
     public String getPhoneNumber() { return phoneNumber; }
 
     public String getEmail() { return email; }
+
+    public LocalDate getDateAdded() { return dateAdded; }
 
     public void setAddress(String address) { this.address = address; }
 
@@ -61,7 +67,8 @@ public class Contact {
                 address + ", " + city + ", " + state + "\n" +
                 "Zip: " + zip + "\n" +
                 "Phone: " + phoneNumber + "\n" +
-                "Email: " + email;
+                "Email: " + email + "\n" +
+                "Added On: " + dateAdded;
     }
 
     @Override

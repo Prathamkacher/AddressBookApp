@@ -5,6 +5,7 @@ import com.addressbook.service.AddressBook;
 import com.addressbook.service.FileService;
 import com.addressbook.service.CsvService;
 import com.addressbook.service.JsonService;
+import com.addressbook.service.DatabaseService;
 
 import java.util.*;
 import java.util.function.Function;
@@ -17,6 +18,7 @@ public class AddressBookMain {
     private FileService fileService = new FileService();
     private CsvService csvService = new CsvService();
     private JsonService jsonService = new JsonService();
+    private DatabaseService databaseService = new DatabaseService();
 
     public void start() {
 
@@ -43,7 +45,8 @@ public class AddressBookMain {
             System.out.println("16 Read CSV");
             System.out.println("17 Write JSON");
             System.out.println("18 Read JSON");
-            System.out.println("19 Exit");
+            System.out.println("19 Retrieve Contacts by Date Range (UC18)");
+            System.out.println("20 Exit");
 
             int choice = Integer.parseInt(scanner.nextLine());
 
@@ -67,9 +70,24 @@ public class AddressBookMain {
                 case 16 -> csvService.readContactsFromCSV();
                 case 17 -> jsonService.writeContactsToJson(getAllContacts());
                 case 18 -> jsonService.readContactsFromJson();
-                case 19 -> { return; }
+                case 19 -> retrieveContactsByDate(scanner);
+                case 20 -> { return; }
             }
         }
+    }
+
+    private void retrieveContactsByDate(Scanner scanner) {
+
+        System.out.print("Enter Start Date (YYYY-MM-DD): ");
+        String start = scanner.nextLine();
+
+        System.out.print("Enter End Date (YYYY-MM-DD): ");
+        String end = scanner.nextLine();
+
+        List<Contact> contacts =
+                databaseService.getContactsByDateRange(start, end);
+
+        contacts.forEach(System.out::println);
     }
 
     private void createAddressBook(Scanner scanner) {
@@ -151,7 +169,7 @@ public class AddressBookMain {
         System.out.print("Email: ");
         String email = scanner.nextLine();
 
-        return new Contact(firstName,lastName,address,city,state,zip,phone,email);
+        return new Contact(firstName,lastName,address,city,state,zip,phone,email,java.time.LocalDate.now());
     }
 
     private List<Contact> getAllContacts() {
