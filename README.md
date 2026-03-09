@@ -483,3 +483,31 @@ To update a person's contact information in the Address Book and verify through 
 👉 [UC17 – Update Contact and Sync with DB](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC17-update-contact-and-sync-with-db)
 
 ---
+
+## 📇 UC18 – Retrieve Contacts Added Within a Date Range
+
+## Description  
+This use case enables the Address Book system to retrieve contacts from the database that were added within a specific date range. The system uses JDBC to execute queries and fetch records based on the `date_added` field stored in the database.
+
+## Objective  
+To allow users to retrieve contacts added during a particular period by querying the database using JDBC.
+
+## Implementation Flow  
+1. Address Book Service establishes a database connection using JDBC  
+2. The database table is updated to include a `date_added` field  
+3. User provides the start date and end date for the search  
+4. A SQL query retrieves contacts whose `date_added` falls within the given period  
+5. Retrieved records are mapped to contact objects  
+6. The matching contacts are returned and displayed  
+
+## Key Concepts  
+- JDBC database connectivity  
+- SQL queries with date filtering  
+- Using `PreparedStatement` for parameterized queries  
+- Handling date fields in database tables  
+- Mapping database records to Java objects  
+
+🔗 _Code Link:_  
+👉 [UC18 – Retrieve Contacts by Date Range](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC18-retrieve-contacts-by-date-range)
+
+---
