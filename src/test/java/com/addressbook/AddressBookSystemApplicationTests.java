@@ -4,8 +4,6 @@ import com.addressbook.model.Contact;
 import com.addressbook.service.DatabaseService;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AddressBookSystemApplicationTests {
@@ -13,15 +11,25 @@ public class AddressBookSystemApplicationTests {
     DatabaseService databaseService = new DatabaseService();
 
     @Test
-    void testRetrieveContactsFromDatabase() {
+    void testUpdateContactAndSyncWithDB() {
 
-        List<Contact> contacts =
-                databaseService.getAllContacts();
+        databaseService.updateContactCity("Pratham","Delhi");
 
-        assertNotNull(contacts);
+        Contact dbContact =
+                databaseService.getContactByName("Pratham");
 
-        System.out.println("\nContacts Retrieved From Database:\n");
+        Contact expectedContact =
+                new Contact(
+                        "Pratham",
+                        "Kacher",
+                        "Bhopal",
+                        "Delhi",
+                        "MP",
+                        "462001",
+                        "9876543210",
+                        "pratham@gmail.com"
+                );
 
-        contacts.forEach(System.out::println);
+        assertEquals(expectedContact, dbContact);
     }
 }

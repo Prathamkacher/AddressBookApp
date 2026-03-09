@@ -2,10 +2,7 @@ package com.addressbook.service;
 
 import com.addressbook.model.Contact;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,21 +15,19 @@ public class DatabaseService {
 
     private static final String PASSWORD = "root";
 
+    public Connection getConnection() throws SQLException {
+
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
     public List<Contact> getAllContacts() {
 
         List<Contact> contacts = new ArrayList<>();
 
-        try {
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement()) {
 
-            Connection connection =
-                    DriverManager.getConnection(URL, USER, PASSWORD);
-
-            Statement statement =
-                    connection.createStatement();
-
-            String query = "SELECT * FROM contacts";
-
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = statement.executeQuery("SELECT * FROM contacts");
 
             while (rs.next()) {
 
@@ -51,13 +46,63 @@ public class DatabaseService {
                 contacts.add(contact);
             }
 
-            connection.close();
-
         } catch (Exception e) {
 
-            System.out.println("Database Error: " + e.getMessage());
+            System.out.println("DB Error: " + e.getMessage());
         }
 
         return contacts;
+    }
+
+    public void updateContactCity(String firstName, String city) {
+
+        String query = "UPDATE contacts SET city=? WHERE first_name=?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setString(1, city);
+            ps.setString(2, firstName);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+
+            System.out.println("Update Error: " + e.getMessage());
+        }
+    }
+
+    public Contact getContactByName(String name) {
+
+        String query = "SELECT * FROM contacts WHERE first_name=?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                return new Contact(
+
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("address"),
+                        rs.getString("city"),
+                        rs.getString("state"),
+                        rs.getString("zip"),
+                        rs.getString("phone"),
+                        rs.getString("email")
+                );
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Fetch Error: " + e.getMessage());
+        }
+
+        return null;
     }
 }

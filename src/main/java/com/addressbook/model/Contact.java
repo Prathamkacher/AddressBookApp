@@ -27,71 +27,64 @@ public class Contact {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
 
-    public String getLastName() {
-        return lastName;
-    }
-    
-    public String getCity() {
-        return city;
-    }
+    public String getLastName() { return lastName; }
 
-    public String getState() {
-        return state;
-    }
-    
-    public String getZip() {
-        return zip;
-    }
-    
-    public String getAddress() {
-        return address;
-    }
+    public String getAddress() { return address; }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-    
-    public String getEmail() {
-        return email;
-    }
+    public String getCity() { return city; }
+
+    public String getState() { return state; }
+
+    public String getZip() { return zip; }
+
+    public String getPhoneNumber() { return phoneNumber; }
+
+    public String getEmail() { return email; }
 
     public void setAddress(String address) { this.address = address; }
+
     public void setCity(String city) { this.city = city; }
+
     public void setState(String state) { this.state = state; }
+
     public void setZip(String zip) { this.zip = zip; }
+
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
     public void setEmail(String email) { this.email = email; }
-
-    // equals() for duplicate checking
-    @Override
-    public boolean equals(Object obj) {
-
-        if (this == obj) return true;
-
-        if (obj == null || getClass() != obj.getClass()) return false;
-
-        Contact contact = (Contact) obj;
-
-        return firstName.equalsIgnoreCase(contact.firstName) &&
-               lastName.equalsIgnoreCase(contact.lastName);
-    }
-
-    // hashCode (required when equals is overridden)
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName.toLowerCase(), lastName.toLowerCase());
-    }
 
     @Override
     public String toString() {
         return firstName + " " + lastName + "\n" +
-               address + ", " + city + ", " + state + "\n" +
-               "Zip: " + zip + "\n" +
-               "Phone: " + phoneNumber + "\n" +
-               "Email: " + email;
+                address + ", " + city + ", " + state + "\n" +
+                "Zip: " + zip + "\n" +
+                "Phone: " + phoneNumber + "\n" +
+                "Email: " + email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (!(o instanceof Contact)) return false;
+
+        Contact contact = (Contact) o;
+
+        return Objects.equals(firstName, contact.firstName) &&
+                Objects.equals(lastName, contact.lastName) &&
+                Objects.equals(address, contact.address) &&
+                Objects.equals(city, contact.city) &&
+                Objects.equals(state, contact.state) &&
+                Objects.equals(zip, contact.zip) &&
+                Objects.equals(phoneNumber, contact.phoneNumber) &&
+                Objects.equals(email, contact.email);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(firstName, lastName, address, city, state, zip, phoneNumber, email);
     }
 }
