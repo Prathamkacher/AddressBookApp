@@ -4,6 +4,7 @@ import com.addressbook.model.Contact;
 import com.addressbook.service.AddressBook;
 import com.addressbook.service.FileService;
 import com.addressbook.service.CsvService;
+import com.addressbook.service.JsonService;
 
 import java.util.*;
 import java.util.function.Function;
@@ -12,8 +13,10 @@ import java.util.stream.Collectors;
 public class AddressBookMain {
 
     private Map<String, AddressBook> addressBooks = new HashMap<>();
+
     private FileService fileService = new FileService();
     private CsvService csvService = new CsvService();
+    private JsonService jsonService = new JsonService();
 
     public void start() {
 
@@ -38,7 +41,9 @@ public class AddressBookMain {
             System.out.println("14 Read TXT");
             System.out.println("15 Write CSV");
             System.out.println("16 Read CSV");
-            System.out.println("17 Exit");
+            System.out.println("17 Write JSON");
+            System.out.println("18 Read JSON");
+            System.out.println("19 Exit");
 
             int choice = Integer.parseInt(scanner.nextLine());
 
@@ -60,7 +65,9 @@ public class AddressBookMain {
                 case 14 -> fileService.readContactsFromFile();
                 case 15 -> csvService.writeContactsToCSV(getAllContacts());
                 case 16 -> csvService.readContactsFromCSV();
-                case 17 -> { return; }
+                case 17 -> jsonService.writeContactsToJson(getAllContacts());
+                case 18 -> jsonService.readContactsFromJson();
+                case 19 -> { return; }
             }
         }
     }
