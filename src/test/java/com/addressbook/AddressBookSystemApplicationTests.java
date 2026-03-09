@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,18 +15,17 @@ public class AddressBookSystemApplicationTests {
     DatabaseService databaseService = new DatabaseService();
 
 
+    // UC16
     @Test
     void testRetrieveAllContactsFromDB() {
 
         List<Contact> contacts = databaseService.getAllContacts();
 
         assertNotNull(contacts);
-
-        // Ensures method executed correctly
-        assertTrue(contacts.size() >= 0);
     }
 
-    
+
+    // UC17
     @Test
     void testUpdateContactAndSyncWithDB() {
 
@@ -51,6 +51,7 @@ public class AddressBookSystemApplicationTests {
     }
 
 
+    // UC18
     @Test
     void testRetrieveContactsBetweenDates() {
 
@@ -62,12 +63,33 @@ public class AddressBookSystemApplicationTests {
         LocalDate start = LocalDate.parse("2024-01-01");
         LocalDate end = LocalDate.parse("2026-12-31");
 
-        boolean allWithinRange = contacts.stream()
+        boolean validRange = contacts.stream()
                 .allMatch(contact ->
                         !contact.getDateAdded().isBefore(start) &&
-                        !contact.getDateAdded().isAfter(end)
-                );
+                        !contact.getDateAdded().isAfter(end));
 
-        assertTrue(allWithinRange);
+        assertTrue(validRange);
+    }
+
+
+    // UC19 - Count by City
+    @Test
+    void testCountContactsByCity() {
+
+        Map<String, Integer> cityCount =
+                databaseService.getContactCountByCity();
+
+        assertNotNull(cityCount);
+    }
+
+
+    // UC19 - Count by State
+    @Test
+    void testCountContactsByState() {
+
+        Map<String, Integer> stateCount =
+                databaseService.getContactCountByState();
+
+        assertNotNull(stateCount);
     }
 }

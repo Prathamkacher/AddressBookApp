@@ -4,8 +4,7 @@ import com.addressbook.model.Contact;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DatabaseService {
 
@@ -17,10 +16,10 @@ public class DatabaseService {
     private static final String PASSWORD = "root";
 
     public Connection getConnection() throws SQLException {
-
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
+    // UC16 - Retrieve all contacts
     public List<Contact> getAllContacts() {
 
         List<Contact> contacts = new ArrayList<>();
@@ -56,6 +55,8 @@ public class DatabaseService {
         return contacts;
     }
 
+
+    // UC17 - Update Contact City
     public void updateContactCity(String firstName, String city) {
 
         String query = "UPDATE contacts SET city=? WHERE first_name=?";
@@ -74,6 +75,8 @@ public class DatabaseService {
         }
     }
 
+
+    // UC17 - Retrieve Contact by Name
     public Contact getContactByName(String name) {
 
         String query = "SELECT * FROM contacts WHERE first_name=?";
@@ -109,7 +112,8 @@ public class DatabaseService {
         return null;
     }
 
-    // UC18
+
+    // UC18 - Retrieve contacts between dates
     public List<Contact> getContactsByDateRange(String startDate, String endDate) {
 
         List<Contact> contacts = new ArrayList<>();
@@ -148,5 +152,63 @@ public class DatabaseService {
         }
 
         return contacts;
+    }
+
+
+    // UC19 - Count contacts by City
+    public Map<String, Integer> getContactCountByCity() {
+
+        Map<String, Integer> cityCount = new HashMap<>();
+
+        String query = "SELECT city, COUNT(*) AS total FROM contacts GROUP BY city";
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement()) {
+
+            ResultSet rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+
+                cityCount.put(
+                        rs.getString("city"),
+                        rs.getInt("total")
+                );
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("City Count Error: " + e.getMessage());
+        }
+
+        return cityCount;
+    }
+
+
+    // UC19 - Count contacts by State
+    public Map<String, Integer> getContactCountByState() {
+
+        Map<String, Integer> stateCount = new HashMap<>();
+
+        String query = "SELECT state, COUNT(*) AS total FROM contacts GROUP BY state";
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement()) {
+
+            ResultSet rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+
+                stateCount.put(
+                        rs.getString("state"),
+                        rs.getInt("total")
+                );
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("State Count Error: " + e.getMessage());
+        }
+
+        return stateCount;
     }
 }
