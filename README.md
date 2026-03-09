@@ -511,3 +511,30 @@ To allow users to retrieve contacts added during a particular period by querying
 👉 [UC18 – Retrieve Contacts by Date Range](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC18-retrieve-contacts-by-date-range)
 
 ---
+
+## 📇 UC19 – Count Contacts by City or State from Database
+
+## Description  
+This use case enables the Address Book system to retrieve the number of contacts stored in the database based on city or state. The counting operation is performed using database functions through JDBC.
+
+## Objective  
+To determine the number of contacts belonging to a particular city or state directly from the database.
+
+## Implementation Flow  
+1. Address Book Service establishes a database connection using JDBC  
+2. User specifies the city or state to search  
+3. A SQL query using database functions (such as `COUNT`) is executed  
+4. The query retrieves the total number of contacts for the given city or state  
+5. The result is returned and displayed  
+
+## Key Concepts  
+- JDBC database connectivity  
+- SQL aggregate functions (`COUNT`)  
+- Filtering database records by City or State  
+- Using `PreparedStatement` for secure queries  
+- Retrieving computed results from the database  
+
+🔗 _Code Link:_  
+👉 [UC19 – Count Contacts by City or State from DB](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC19-count-contacts-by-city-state-db)
+
+---
