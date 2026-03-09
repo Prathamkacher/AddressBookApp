@@ -397,3 +397,32 @@ To persist Address Book contacts in a CSV file format using the OpenCSV library.
 👉 [UC14 – Address Book CSV IO](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC14-read-write-addressbook-csv/src)
 
 ---
+
+## 📇 UC15 – Read and Write Address Book as JSON File
+
+## Description  
+This use case enables the Address Book application to store and retrieve contact details in JSON format. The system uses the GSON library to serialize contact objects into JSON and deserialize them back into Java objects.
+
+## Objective  
+To persist Address Book contacts in a JSON file using the GSON library.
+
+## Implementation Flow  
+1. Spring Boot application starts  
+2. `AddressBookMain.start()` method is executed  
+3. Contacts are retrieved from the Address Book collection  
+4. Contact objects are converted to JSON format using the GSON library  
+5. The JSON data is written to a file  
+6. The JSON file can be read and converted back into contact objects  
+7. The retrieved contacts are displayed in the console  
+
+## Key Concepts  
+- JSON data format  
+- Object serialization and deserialization  
+- Using the GSON library  
+- Writing JSON using `Gson.toJson()`  
+- Reading JSON using `Gson.fromJson()`  
+
+🔗 _Code Link:_  
+👉 [UC15 – Address Book JSON IO](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC15-read-write-addressbook-json)
+
+---
