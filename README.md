@@ -426,3 +426,31 @@ To persist Address Book contacts in a JSON file using the GSON library.
 👉 [UC15 – Address Book JSON IO](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC15-read-write-addressbook-json)
 
 ---
+
+## 📇 UC16 – Retrieve Address Book Entries from Database
+
+## Description  
+This use case enables the Address Book Service to retrieve all contact entries stored in a database. JDBC is used to establish a connection with the database and fetch the records. The retrieved entries are mapped to the Address Book entities defined in the ER model.
+
+## Objective  
+To connect the Address Book application to a database using JDBC and retrieve all stored contact records.
+
+## Implementation Flow  
+1. Address Book Service establishes a database connection using JDBC  
+2. A query is executed to retrieve all contact records from the database  
+3. The retrieved data is mapped to Address Book entity objects  
+4. The contact list is returned by the Address Book Service  
+5. JUnit tests are written following the TDD approach to validate database retrieval  
+
+## Key Concepts  
+- JDBC database connectivity  
+- SQL queries for data retrieval  
+- Mapping database records to Java objects  
+- Implementing entities based on ER model  
+- Test Driven Development (TDD)  
+- Unit testing using JUnit  
+
+🔗 _Code Link:_  
+👉 [UC16 – Retrieve Address Book Entries from DB](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC16-retrieve-contacts-from-database)
+
+---
