@@ -66,13 +66,14 @@ public class AddressBookSystemApplicationTests {
         boolean validRange = contacts.stream()
                 .allMatch(contact ->
                         !contact.getDateAdded().isBefore(start) &&
-                        !contact.getDateAdded().isAfter(end));
+                        !contact.getDateAdded().isAfter(end)
+                );
 
         assertTrue(validRange);
     }
 
 
-    // UC19 - Count by City
+    // UC19
     @Test
     void testCountContactsByCity() {
 
@@ -83,13 +84,24 @@ public class AddressBookSystemApplicationTests {
     }
 
 
-    // UC19 - Count by State
+    // UC20
     @Test
-    void testCountContactsByState() {
+    void testAddContactToDatabase() {
 
-        Map<String, Integer> stateCount =
-                databaseService.getContactCountByState();
+        Contact contact = new Contact(
+                "TestUser",
+                "Demo",
+                "Indore",
+                "Indore",
+                "MP",
+                "452001",
+                "9999999999",
+                "testuser@gmail.com",
+                LocalDate.now()
+        );
 
-        assertNotNull(stateCount);
+        boolean result = databaseService.addContact(contact);
+
+        assertTrue(result);
     }
 }

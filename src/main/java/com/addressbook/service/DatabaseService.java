@@ -1,9 +1,8 @@
 package com.addressbook.service;
 
 import com.addressbook.model.Contact;
-
+import java.sql.Date;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.*;
 
 public class DatabaseService {
@@ -19,7 +18,8 @@ public class DatabaseService {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    // UC16 - Retrieve all contacts
+
+    // UC16
     public List<Contact> getAllContacts() {
 
         List<Contact> contacts = new ArrayList<>();
@@ -48,7 +48,6 @@ public class DatabaseService {
             }
 
         } catch (Exception e) {
-
             System.out.println("DB Error: " + e.getMessage());
         }
 
@@ -56,7 +55,7 @@ public class DatabaseService {
     }
 
 
-    // UC17 - Update Contact City
+    // UC17
     public void updateContactCity(String firstName, String city) {
 
         String query = "UPDATE contacts SET city=? WHERE first_name=?";
@@ -70,13 +69,12 @@ public class DatabaseService {
             ps.executeUpdate();
 
         } catch (Exception e) {
-
             System.out.println("Update Error: " + e.getMessage());
         }
     }
 
 
-    // UC17 - Retrieve Contact by Name
+    // UC17
     public Contact getContactByName(String name) {
 
         String query = "SELECT * FROM contacts WHERE first_name=?";
@@ -105,7 +103,6 @@ public class DatabaseService {
             }
 
         } catch (Exception e) {
-
             System.out.println("Fetch Error: " + e.getMessage());
         }
 
@@ -113,7 +110,7 @@ public class DatabaseService {
     }
 
 
-    // UC18 - Retrieve contacts between dates
+    // UC18
     public List<Contact> getContactsByDateRange(String startDate, String endDate) {
 
         List<Contact> contacts = new ArrayList<>();
@@ -147,7 +144,6 @@ public class DatabaseService {
             }
 
         } catch (Exception e) {
-
             System.out.println("Date Range Fetch Error: " + e.getMessage());
         }
 
@@ -155,7 +151,7 @@ public class DatabaseService {
     }
 
 
-    // UC19 - Count contacts by City
+    // UC19
     public Map<String, Integer> getContactCountByCity() {
 
         Map<String, Integer> cityCount = new HashMap<>();
@@ -176,7 +172,6 @@ public class DatabaseService {
             }
 
         } catch (Exception e) {
-
             System.out.println("City Count Error: " + e.getMessage());
         }
 
@@ -184,7 +179,7 @@ public class DatabaseService {
     }
 
 
-    // UC19 - Count contacts by State
+    // UC19
     public Map<String, Integer> getContactCountByState() {
 
         Map<String, Integer> stateCount = new HashMap<>();
@@ -205,10 +200,46 @@ public class DatabaseService {
             }
 
         } catch (Exception e) {
-
             System.out.println("State Count Error: " + e.getMessage());
         }
 
         return stateCount;
+    }
+
+
+    // UC20 - Add new contact using DB Transaction
+    public boolean addContact(Contact contact) {
+
+        String query = "INSERT INTO contacts " +
+                "(first_name,last_name,address,city,state,zip,phone,email,date_added) " +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            connection.setAutoCommit(false);
+
+            ps.setString(1, contact.getFirstName());
+            ps.setString(2, contact.getLastName());
+            ps.setString(3, contact.getAddress());
+            ps.setString(4, contact.getCity());
+            ps.setString(5, contact.getState());
+            ps.setString(6, contact.getZip());
+            ps.setString(7, contact.getPhoneNumber());
+            ps.setString(8, contact.getEmail());
+            ps.setDate(9, Date.valueOf(contact.getDateAdded()));
+
+            ps.executeUpdate();
+
+            connection.commit();
+
+            return true;
+
+        } catch (Exception e) {
+
+            System.out.println("Insert Error: " + e.getMessage());
+        }
+
+        return false;
     }
 }
