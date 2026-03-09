@@ -454,3 +454,32 @@ To connect the Address Book application to a database using JDBC and retrieve al
 👉 [UC16 – Retrieve Address Book Entries from DB](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC16-retrieve-contacts-from-database)
 
 ---
+
+## 📇 UC17 – Update Contact Information and Sync with Database
+
+## Description  
+This use case refactors the Address Book system to support updating contact information stored in the database. The Address Book Service updates a person's contact details using JDBC and ensures that the contact information in memory remains synchronized with the database.
+
+## Objective  
+To update a person's contact information in the Address Book and verify through JUnit tests that the updated data in memory is consistent with the data stored in the database.
+
+## Implementation Flow  
+1. Address Book Service establishes a database connection using JDBC  
+2. User provides the person's name whose contact information needs to be updated  
+3. A SQL update query is executed using `PreparedStatement`  
+4. The updated contact information is retrieved from the database  
+5. The in-memory contact object is synchronized with the updated database record  
+6. JUnit tests verify that the in-memory data matches the database data using the overridden `equals()` method  
+
+## Key Concepts  
+- JDBC CRUD operations  
+- Using `PreparedStatement` for secure database queries  
+- Updating records in a relational database  
+- Synchronizing in-memory objects with database data  
+- Implementing `equals()` for object comparison  
+- Test Driven Development (TDD) with JUnit  
+
+🔗 _Code Link:_  
+👉 [UC17 – Update Contact and Sync with DB](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC17-update-contact-and-sync-with-db)
+
+---
