@@ -538,3 +538,31 @@ To determine the number of contacts belonging to a particular city or state dire
 👉 [UC19 – Count Contacts by City or State from DB](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC19-count-contacts-by-city-state-db)
 
 ---
+
+## 📇 UC20 – Add New Contact to Address Book Database
+
+## Description  
+This use case enables the Address Book system to add new contacts directly into the database. JDBC is used to perform the insert operation, and database transactions are implemented to ensure data consistency when multiple tables are affected.
+
+## Objective  
+To insert new contact records into the Address Book database while maintaining data integrity using database transactions.
+
+## Implementation Flow  
+1. Address Book Service establishes a database connection using JDBC  
+2. User provides the contact details to be added  
+3. A SQL `INSERT` query is executed using `PreparedStatement`  
+4. If multiple tables are involved, a database transaction is initiated  
+5. The transaction is committed after successful insertion into all tables  
+6. In case of failure, the transaction is rolled back to maintain data consistency  
+
+## Key Concepts  
+- JDBC database connectivity  
+- SQL `INSERT` operation  
+- Using `PreparedStatement` for parameterized queries  
+- Database transactions (`commit` and `rollback`)  
+- Maintaining data consistency across multiple tables  
+
+🔗 _Code Link:_  
+👉 [UC20 – Add Contact to Address Book DB](https://github.com/Prathamkacher/AddressBookApp/tree/feature/UC20-add-contact-to-database)
+
+----
